@@ -1,3 +1,4 @@
+var PORT = process.env.PORT;
 var http = require("http");
 
 http.createServer(function(request, response) {
@@ -5,7 +6,7 @@ http.createServer(function(request, response) {
   response.writeHead(200, {"Content-Type": "text/plain"});
   response.write("Hello world");
   response.end();
-}).listen(8888);
+}).listen(PORT);
 console.log("Server is created.");
 
 // 用createServer建一個server，並且server會監聽電腦的8888的port
