@@ -1,42 +1,17 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var http = require("http");
 
-var memberRouter = require('./routes/member');
-var productRouter = require('./routes/product');
+http.createServer(function(request, response) {
+  console.log("Server is connected.");
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.write("Hello world");
+  response.end();
+}).listen(8888);
+console.log("Server is created.");
 
-var app = express();
+// 用createServer建一個server，並且server會監聽電腦的8888的port
+// 所以我開網頁連 127.0.0.1:8888
+// 相當於我從外部發一個請求到某IP的某port，127.0.0.1就是本機電腦啦
+// 他回傳hello world 給我show
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', memberRouter);
-app.use('/member', memberRouter);
-app.use('/product', productRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-module.exports = app;
+// 每次有人連上自己的Server，一次有兩個request進來，秀url會發現兩次要求的內容不一樣，是因為有一個request是在要求 Favicon.ico
+// 什麼是Favicon.ico? > https://blog.miniasp.com/post/2007/12/17/Introduce-faviconico-and-important-concept.aspx
