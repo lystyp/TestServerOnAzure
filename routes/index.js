@@ -12,7 +12,8 @@ var config = {
       type: 'default',
       options: {
           userName: process.env.SQL_USER_NAME, // update me
-          password: process.env.SQL_PASSWORD // update me
+          password: process.env.SQL_PASSWORD, // update me
+          encrypt: true
       }
   },
   options: {
