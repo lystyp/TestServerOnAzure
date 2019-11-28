@@ -1,34 +1,34 @@
 var express = require('express');
 var router = express.Router();
 
-var Connection = require('tedious').Connection;
-var Request = require('tedious').Request;
-var TYPES = require('tedious').TYPES;
+// var Connection = require('tedious').Connection;
+// var Request = require('tedious').Request;
+// var TYPES = require('tedious').TYPES;
 
-// Create connection to database
-var config = {
-  server: 'testsqlforlystyp.database.windows.net',
-  authentication: {
-      type: 'default',
-      options: {
-          userName: process.env.SQL_USER_NAME, // update me
-          password: process.env.SQL_PASSWORD // update me
-      }
-  },
-  options: {
-      database: process.env.SQL_DATABASE_NAME
-  }
-}
-var connection = new Connection(config);
-connection.on('connect', function(err) {
-  if (err) {
-    console.log("SQLLLLLLLLLLLLLLLLL");
-    console.log(err);
-  } else {
-    console.log("SQLLLLLLLLLLLLLLLLL");
-    console.log('Connected');
-  }
-});
+// // Create connection to database
+// var config = {
+//   server: 'testsqlforlystyp.database.windows.net',
+//   authentication: {
+//       type: 'default',
+//       options: {
+//           userName: process.env.SQL_USER_NAME, // update me
+//           password: process.env.SQL_PASSWORD // update me
+//       }
+//   },
+//   options: {
+//       database: process.env.SQL_DATABASE_NAME
+//   }
+// }
+// var connection = new Connection(config);
+// connection.on('connect', function(err) {
+//   if (err) {
+//     console.log("SQLLLLLLLLLLLLLLLLL");
+//     console.log(err);
+//   } else {
+//     console.log("SQLLLLLLLLLLLLLLLLL");
+//     console.log('Connected');
+//   }
+// });
 
 
 
