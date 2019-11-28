@@ -12,12 +12,13 @@ var config = {
       type: 'default',
       options: {
           userName: process.env.SQL_USER_NAME, // update me
-          password: process.env.SQL_PASSWORD, // update me
-          encrypt: true
+          password: process.env.SQL_PASSWORD // update me
+          
       }
   },
   options: {
-      database: process.env.SQL_DATABASE_NAME
+      database: process.env.SQL_DATABASE_NAME,
+      encrypt: true
   }
 }
 var connection = new Connection(config);
