@@ -1,6 +1,47 @@
 var express = require('express');
 var router = express.Router();
 
+var Connection = require('tedious').Connection;
+var Request = require('tedious').Request;
+var TYPES = require('tedious').TYPES;
+
+// Create connection to database
+var config = {
+  server: 'testsqlforlystyp.database.windows.net',
+  authentication: {
+      type: 'default',
+      options: {
+          userName: process.env.SQL_USER_NAME, // update me
+          password: process.env.SQL_PASSWORD // update me
+      }
+  },
+  options: {
+      database: process.env.SQL_DATABASE_NAME
+  }
+}
+var connection = new Connection(config);
+connection.on('connect', function(err) {
+  if (err) {
+    console.log("SQLLLLLLLLLLLLLLLLL");
+    console.log(err);
+  } else {
+    console.log("SQLLLLLLLLLLLLLLLLL");
+    console.log('Connected');
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   // 這邊的render就是指把views裡面的index.hjs丟給res去瀏覽器render，並且index.hjs裡面有一個title變數，把Express存到index.hjs的title裡面丟過去
