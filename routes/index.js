@@ -25,15 +25,9 @@ var connection = new Connection(config);
 connection.on('connect', function(err) {
   if (err) {
     console.log("SQLLLLLLLLLLLLLLLLL");
-    console.log(process.env.SQL_USER_NAME);
-    console.log(process.env.SQL_PASSWORD);
-    console.log(process.env.SQL_DATABASE_NAME);
     console.log(err);
   } else {
     console.log("SQLLLLLLLLLLLLLLLLL");
-    console.log(process.env.SQL_USER_NAME);
-    console.log(process.env.SQL_PASSWORD);
-    console.log(process.env.SQL_DATABASE_NAME);
     console.log('Connected');
   }
 });
