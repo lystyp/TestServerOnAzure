@@ -25,9 +25,15 @@ var connection = new Connection(config);
 connection.on('connect', function(err) {
   if (err) {
     console.log("SQLLLLLLLLLLLLLLLLL");
+    console.log(process.env.SQL_USER_NAME);
+    console.log(process.env.SQL_PASSWORD);
+    console.log(process.env.SQL_DATABASE_NAME);
     console.log(err);
   } else {
     console.log("SQLLLLLLLLLLLLLLLLL");
+    console.log(process.env.SQL_USER_NAME);
+    console.log(process.env.SQL_PASSWORD);
+    console.log(process.env.SQL_DATABASE_NAME);
     console.log('Connected');
   }
 });
@@ -62,7 +68,7 @@ router.get('/', function(req, res, next) {
   //https://ithelp.ithome.com.tw/articles/10186877
 
   // 這裡的render應該是把send跟上面那個render給包再一起做好了，並且順便把不同模板轉成html了
-  res.render('index', { title: process.env.SQL_USER_NAME });
+  res.render('index', { title: 'Main' });
 });
 
 module.exports = router;
