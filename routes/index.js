@@ -20,15 +20,15 @@ var config = {
   }
 }
 var connection = new Connection(config);
-// connection.on('connect', function(err) {
-//   if (err) {
-//     console.log("SQLLLLLLLLLLLLLLLLL");
-//     console.log(err);
-//   } else {
-//     console.log("SQLLLLLLLLLLLLLLLLL");
-//     console.log('Connected');
-//   }
-// });
+connection.on('connect', function(err) {
+  if (err) {
+    console.log("SQLLLLLLLLLLLLLLLLL");
+    console.log(err);
+  } else {
+    console.log("SQLLLLLLLLLLLLLLLLL");
+    console.log('Connected');
+  }
+});
 
 
 
