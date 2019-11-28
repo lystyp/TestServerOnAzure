@@ -19,7 +19,7 @@ var config = {
       database: process.env.SQL_DATABASE_NAME
   }
 }
-// var connection = new Connection(config);
+var connection = new Connection(config);
 // connection.on('connect', function(err) {
 //   if (err) {
 //     console.log("SQLLLLLLLLLLLLLLLLL");
@@ -60,7 +60,7 @@ router.get('/', function(req, res, next) {
   //https://ithelp.ithome.com.tw/articles/10186877
 
   // 這裡的render應該是把send跟上面那個render給包再一起做好了，並且順便把不同模板轉成html了
-  res.render('index', { title: 'Home Page' });
+  res.render('index', { title: process.env.SQL_USER_NAME });
 });
 
 module.exports = router;
