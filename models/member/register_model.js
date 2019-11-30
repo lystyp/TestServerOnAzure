@@ -6,8 +6,8 @@ module.exports = function register(memberData) {
     let result = {};
     return new Promise((resolve, reject) => {
         // 尋找是否有重複的email
-        request = new Request('SELECT email FROM member_info WHERE email = @email',
-            function(err, rowCount, rows) {
+        db.query('SELECT email FROM member_info WHERE email = ' + '\'' + memberData.email + '\'',
+            function(err, rows) {
                 // 若資料庫部分出現問題，則回傳給client端「伺服器錯誤，請稍後再試！」的結果。
                 if (err) {
                     console.log(err);
@@ -23,8 +23,25 @@ module.exports = function register(memberData) {
                     reject(result);
                 } else {
                     // 將資料寫入資料庫
-                    request = new Request('INSERT INTO member_info SET @data',
-                        function(err, rowCount, rows) {
+                    let s_col = ""
+                    let s_val = ""
+                    for (let i of Object.keys(memberData)){
+                        if (s_col != ""){
+                            s_col = s_col + "," + i;
+                        } else {
+                            s_col = i;
+                        }
+                    }
+
+                    for (let i of Object.values(memberData)){
+                        if (s_val != ""){
+                            s_val = s_val + "," + '\'' + i + '\'';
+                        } else {
+                            s_val = '\'' + i + '\'';
+                        }
+                    }
+                    db.query('INSERT INTO member_info (' + s_col + ') VALUES (' + s_val + ')',          
+                        function(err, rows) {
                             // 若資料庫部分出現問題，則回傳給client端「伺服器錯誤，請稍後再試！」的結果。
                             if (err) {
                                 console.log(err);
@@ -39,12 +56,8 @@ module.exports = function register(memberData) {
                             resolve(result);
                         }
                     );
-                    request.addParameter('data', TYPES.NVarChar, memberData);
-                    db.execSql(request);
                 }
             }
         );
-        request.addParameter('email', TYPES.NVarChar, memberData.email);
-        db.execSql(request);
     })
 }

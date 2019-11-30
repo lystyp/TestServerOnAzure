@@ -5,9 +5,7 @@ var Request = require('tedious').Request;
 module.exports = function getInfo(id) {
     let result = {};
     return new Promise((resolve, reject) => {
-        request = new Request(
-            'SELECT * FROM member_info WHERE id = @ID',
-            function(err, rowCount, rows) {
+        db.query('SELECT * FROM member_info WHERE id = ' + id, function(err, rows) {
                 if (err) {
                     console.log(err);
                     result.status = "登入失敗。"
@@ -16,9 +14,6 @@ module.exports = function getInfo(id) {
                     return;
                 } 
                 resolve(rows);
-            });
-        request.addParameter('ID', TYPES.Int, id);
-        // Execute SQL statement
-        db.execSql(request);
+        });
     })
 }

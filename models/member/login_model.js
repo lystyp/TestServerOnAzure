@@ -6,8 +6,9 @@ module.exports = function login(memberData) {
     console.log(memberData);
     let result = {};
     return new Promise((resolve, reject) => {
-        request = new Request('SELECT * FROM member_info WHERE email = @email and password = @password',
-            function(err, rowCount, rows) {
+        db.query('SELECT * FROM member_info WHERE email = ' + '\'' + memberData.email + '\'' + 
+        'and password = '  + '\'' + memberData.password + '\'',
+            function(err, rows) {
                 if (err) {
                     console.log(err);
                     result.status = "登入失敗。"
@@ -16,11 +17,7 @@ module.exports = function login(memberData) {
                     return;
                 } 
                 resolve(rows);
-        });
-        
-        request.addParameter('email', TYPES.NVarChar, memberData.email);
-        request.addParameter('password', TYPES.NVarChar, memberData.password);
-        // Execute SQL statement
-        db.execSql(request);
-    })
+            }
+        );
+    });
 }

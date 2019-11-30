@@ -30,7 +30,7 @@ module.exports = async function getOrderedList(member_id) {
 
 const getProductName = (productID) => {
     return new Promise((resolve, reject) => {
-        db.query('SELECT name FROM product WHERE id = ?', productID, function (err, rows) {
+        db.query('SELECT name FROM product WHERE id = ' + productID, function (err, rows) {
         if (err) {
             console.log(err);
             reject(err);
@@ -43,7 +43,7 @@ const getProductName = (productID) => {
 
 const getOrderIdList = (member_id) => {
     return new Promise((resolve, reject) => {
-        db.query('SELECT DISTINCT order_id FROM order_list where member_id = ?',member_id, function (err, rows) {
+        db.query('SELECT DISTINCT order_id FROM order_list where member_id = ' + member_id, function (err, rows) {
             if (err) {
                 console.log(err);
                 reject(err);
@@ -61,7 +61,7 @@ const getOrderIdList = (member_id) => {
 const getProductList = (order_id, member_id) => {
     console.log("getProductList : order_id = " + order_id + ", member_id = " + member_id);
     return new Promise((resolve, reject) => {
-        db.query('SELECT product_id, order_quantity, order_price FROM order_list where order_id = ? and member_id = ?',[order_id, member_id], function (err, rows) {
+        db.query('SELECT product_id, order_quantity, order_price FROM order_list where order_id = ' + order_id + 'and member_id = ' + member_id, function (err, rows) {
             if (err) {
                 console.log(err);
                 reject(err);

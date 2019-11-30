@@ -5,8 +5,16 @@ var Request = require('tedious').Request;
 module.exports = function update(id, memberUpdateData) {
     let result = {};
     return new Promise((resolve, reject) => {
-        request = new Request('UPDATE member_info SET @data WHERE id = @id',
-            function(err, rowCount, rows) {
+        let s = ""
+        for (let i of Object.keys(memberUpdateData)){
+            if (s != ""){
+                s = s + ", " + i + " = " + '\'' + memberUpdateData[i] + '\'';
+            } else {
+                s = i + " = " + '\'' + memberUpdateData[i]+ '\'';
+            }
+        }
+        db.query('UPDATE member_info SET ' + s + 'WHERE id = ' + id,
+            function(err, rows) {
                 if (err) {
                     console.log(err);
                     result.status = "會員資料更新失敗。"
@@ -19,8 +27,5 @@ module.exports = function update(id, memberUpdateData) {
                 resolve(result)
             }
         );
-        request.addParameter('data', TYPES.NVarChar, memberUpdateData);
-        request.addParameter('id', TYPES.Int, id);
-        db.execSql(request);
     })
 }
